@@ -358,6 +358,7 @@ d3.csv("data/stock.csv", function (error, data) {
 		.attr("class", "y axis")
 		.call(yAxisFour)
 		.append('text')
+		// .attr('x', 100)
 		.attr('transform', 'rotate(-90)')
 		.attr('y', 6)
 		.attr('dy', '.5em')
