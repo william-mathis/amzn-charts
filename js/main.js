@@ -12,7 +12,7 @@ var width = parseFloat($("#svg").attr("width")) - margin.left - margin.right,
 	height4 = parseFloat($("#svg4").attr("height")) - margin.top - margin.bottom;
 
 var svg = d3.select('#svg').append('svg')
-	.attr('width', width + margin.left + margin.right + "%")
+	.attr('width', width + margin.left + margin.right)
 	.attr('height', height + margin.top + margin.bottom)
 	.append('g')
 	.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -36,7 +36,7 @@ var xAxis = d3.svg.axis()
 
 
 var svg2 = d3.select('#svg2').append('svg')
-	.attr('width', width + margin.left + margin.right + "%")
+	.attr('width', width + margin.left + margin.right)
 	.attr('height', height + margin.top + margin.bottom)
 	.append('g')
 	.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -61,8 +61,8 @@ var yAxisTwo = d3.svg.axis()
 	.ticks(10);
 
 var svg3 = d3.select('#svg3').append('svg')
-	.attr('width', width + margin.left + margin.right + "%")
-	.attr('height', height + margin.top + margin.bottom)
+	.attr('width', width3 + margin3.left + margin.right)
+	.attr('height', height3 + margin.top + margin.bottom)
 	.append('g')
 	.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
@@ -86,7 +86,7 @@ var yAxisThree = d3.svg.axis()
 	.ticks(10);
 
 var svg4 = d3.select('#svg4').append('svg')
-	.attr('width', width + margin.left + margin.right + "%")
+	.attr('width', width + margin.left + margin.right)
 	.attr('height', height + margin.top + margin.bottom)
 	.append('g')
 	.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -264,10 +264,11 @@ d3.csv("data/revenue.csv", function (error, data) {
 	console.log("maxrev = " + maxRevenue);
 
 	xThree.domain(data.map(function (d) { return d.Year; }));
-	yThree.domain([0, d3.max(data, function (d) { return d.Revenue; })]).nice();
+	yThree.domain([0, d3.max(data, function (d) { return d.Revenue; })]);
+
 	svg3.append("g")
 		.attr('class', 'x axis')
-		.attr("transform", "translate(0," + height2 + ")")
+		.attr("transform", "translate(0," + height3 + ")")
 		.call(xAxisThree)
 		.selectAll('text')
 		.attr('y', 0)
@@ -295,14 +296,14 @@ d3.csv("data/revenue.csv", function (error, data) {
 		.append("rect")
 		.style('fill', '#34A69B')
 		.attr("x", function (d) {
-			return x(d.Year); //this works with the xScale function to set the width of the bar
+			return xThree(d.Year); //this works with the xScale function to set the width of the bar
 		})
 		.attr("y", function (d) {
-			return y(d.Revenue); //this y value sets the point from which it starts
+			return yThree(d.Revenue); //this y value sets the point from which it starts
 		})
 		.attr("width", x.rangeBand())
 		.attr("height", function (d) {
-			return height - y(d.Revenue);
+			return height - yThree(d.Revenue);
 		})
 		.style('margin-top', "3px")
 		.on("mouseover", function (d) {
@@ -318,7 +319,7 @@ d3.csv("data/revenue.csv", function (error, data) {
 				.duration(500)
 				.style("opacity", 0);;
 			svg3.append("text")
-				.attr("x", (width / 2))
+				.attr("x", (width3 / 2))
 				.attr("y", 0 - (margin.top / 2))
 				.attr("text-anchor", "middle")
 				.style("font-size", "16px")
@@ -344,15 +345,15 @@ d3.csv("data/stock.csv", function (error, data) {
 	svg4.append("g")
 		.attr('class', 'x axis')
 		.attr("transform", "translate(0," + height2 + ")")
-		.call(xAxisFour);
-	// .selectAll('text')
-	// .attr('y', 0)
-	// .attr('x', 7)
-	// .attr('dy', '.35em')
-	// .attr('transform', 'rotate(90)')
-	// .style('text-anchor', 'start')
-	// .style('font-family', 'sans-serif')
-	// .style('font-size', '.65em');
+		.call(xAxisFour)
+		.selectAll('text')
+		.attr('y', 0)
+		.attr('x', 7)
+		.attr('dy', '.35em')
+		.attr('transform', 'rotate(90)')
+		.style('text-anchor', 'start')
+		.style('font-family', 'sans-serif')
+		.style('font-size', '.65em');
 
 	svg4.append("g")
 		.attr("class", "y axis")
