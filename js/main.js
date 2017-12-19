@@ -1,5 +1,5 @@
 var margin = { top: 20, right: 20, bottom: 30, left: 55 };
-var margin3 = { top: 20, right: 20, bottom: 30, left: 85 };
+var margin3 = { top: 20, right: 20, bottom: 30, left: 55 };
 
 
 var width = parseFloat($("#svg").attr("width")) - margin.left - margin.right,
@@ -145,6 +145,13 @@ d3.csv("data/gross_profit.csv", function (error, data) {
 		.style('font-family', 'sans-serif')
 		.text('Gross profits (millions USD)');
 
+	svg.append("text")
+		.attr("x", (width / 2))
+		.attr("y", 0 - (margin.top / 4))
+		.attr("text-anchor", "middle")
+		.attr('class', 'titles')
+		.text("Profit");
+
 	svg.selectAll("bar")
 		.data(data)
 		.enter()
@@ -216,6 +223,14 @@ d3.csv("data/prime2.csv", function (error, data) {
 		.style('font-family', 'sans-serif')
 		.style('font-size', '.75em')
 		.text('Prime subcribers (millions)');
+
+
+	svg2.append("text")
+		.attr("x", (width / 2))
+		.attr("y", 0 - (margin.top / 4))
+		.attr("text-anchor", "middle")
+		.attr('class', 'titles')
+		.text("Prime members");
 
 	svg2.selectAll("bar")
 		.data(data)
@@ -289,6 +304,14 @@ d3.csv("data/revenue.csv", function (error, data) {
 		.style('text-anchor', 'end')
 		.style('font-family', 'sans-serif')
 		.text('Revenue (millions USD)');
+
+
+	svg3.append("text")
+		.attr("x", (width / 2))
+		.attr("y", 0 - (margin.top / 4))
+		.attr("text-anchor", "middle")
+		.attr('class', 'titles')
+		.text("Revenue");
 
 	svg3.selectAll("bar")
 		.data(data)
@@ -367,6 +390,14 @@ d3.csv("data/stock.csv", function (error, data) {
 		.style('font-family', 'sans-serif')
 		.text('Stock price');
 
+
+
+	svg4.append("text")
+		.attr("x", (width / 2))
+		.attr("y", 0 - (margin.top / 4))
+		.attr("text-anchor", "middle")
+		.attr('class', 'titles')
+		.text("Share price");
 	// svg4.append("g")
 	// .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 	svg4.append('path')
